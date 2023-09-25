@@ -1,46 +1,50 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { CATEGORIES } from "../data";
 
-function NewTaskForm(onTaskFormSubmit) {
-  const [text, setText] = useState("")
-  const [category, setCategory] = useState(CATEGORIES[0])
-  
+function NewTaskForm({ onTaskFormSubmit }) {
+  const [text, setText] = useState("");
+  const [category, setCategory] = useState(CATEGORIES[0]); // Default to "All" category
+
   const handleTextChange = (e) => {
-    setText(e.target.value)
-  }
+    setText(e.target.value);
+  };
 
   const handleCategoryChange = (e) => {
-    setCategory(e.target.value)
-  }
+    setCategory(e.target.value);
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+
+    // Create a new task object
     const newTask = {
       text,
       category,
-      id: Math.random().toString()
-    }
+      id: Math.random().toString(), // Generate a unique ID (replace with a proper ID generation mechanism)
+    };
 
-    onTaskFormSubmit(newTask)
+    // Pass the new task to the parent component
+    onTaskFormSubmit(newTask);
 
-    setText("")
-    setCategory(CATEGORIES[0])
-  }
+    // Reset the form
+    setText("");
+    setCategory(CATEGORIES[0]);
+  };
+
   return (
-    <form className="new-task-form">
+    <form className="new-task-form" onSubmit={handleSubmit}>
       <label>
         Details
-        <input type="text" name="text" />
+        <input type="text" name="text" value={text} onChange={handleTextChange} />
       </label>
       <label>
         Category
-        <select name="category">
+        <select name="category" value={category} onChange={handleCategoryChange}>
           {CATEGORIES.map((category) => (
             <option key={category} value={category}>
-            {category}
+              {category}
             </option>
           ))}
-          {/* render <option> elements for each category here */}
         </select>
       </label>
       <input type="submit" value="Add task" />

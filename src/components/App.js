@@ -11,12 +11,18 @@ import { CATEGORIES, TASKS } from "../data";
 function App() {
   const [tasks, setTasks] = useState(TASKS)
   const [selectedCategory, setSelectedCategory] = useState("All")
+
   const handleCategoryChange = (category) => {
     setSelectedCategory(category)
   }
   const handleDeleteTask = (taskId) => {
     setTasks((prevTasks) => prevTasks.filter((task)=> task.id !== taskId))
   }
+
+  const handleTaskFormSubmit = (newTask) => {
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+  };
+
 
   return (
     <div className="App">
@@ -26,7 +32,7 @@ function App() {
         selectedCategory={selectedCategory}
         onCategoryChange={handleCategoryChange}
       />
-      <NewTaskForm />
+      <NewTaskForm onTaskFormSubmit={handleTaskFormSubmit} />
       <TaskList tasks={tasks} onDeleteTask={handleDeleteTask} />
     </div>
   );
