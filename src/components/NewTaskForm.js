@@ -1,7 +1,31 @@
-import React from "react";
+import React, {useState} from "react";
 import { CATEGORIES } from "../data";
 
-function NewTaskForm() {
+function NewTaskForm(onTaskFormSubmit) {
+  const [text, setText] = useState("")
+  const [category, setCategory] = useState(CATEGORIES[0])
+  
+  const handleTextChange = (e) => {
+    setText(e.target.value)
+  }
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const newTask = {
+      text,
+      category,
+      id: Math.random().toString()
+    }
+
+    onTaskFormSubmit(newTask)
+
+    setText("")
+    setCategory(CATEGORIES[0])
+  }
   return (
     <form className="new-task-form">
       <label>
@@ -13,7 +37,7 @@ function NewTaskForm() {
         <select name="category">
           {CATEGORIES.map((category) => (
             <option key={category} value={category}>
-              {category}
+            {category}
             </option>
           ))}
           {/* render <option> elements for each category here */}
