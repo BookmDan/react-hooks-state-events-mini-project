@@ -1,6 +1,6 @@
 import React from "react";
 
-function Task({id, text ,category, onDelete, }) {
+function Task({id, task, text ,category, onDelete, }) {
   // const { category, text, id } = task
   
   const handleDeleteClick = () => {

@@ -5,15 +5,12 @@ import TaskList from "./TaskList";
 
 import { CATEGORIES, TASKS } from "../data";
 
-// console.log("Here's the data you're working with");
-// console.log({ CATEGORIES, TASKS });
-
 function App() {
   const [tasks, setTasks] = useState(TASKS)
-  const [selectedCategory, setSelectedCategory] = useState("All")
+  const [categories, setCategories] = useState(CATEGORIES)
 
   const handleCategoryChange = (category) => {
-    setSelectedCategory(category)
+    setCategories(category)
   }
   const handleDeleteTask = (taskId) => {
     setTasks((prevTasks) => prevTasks.filter((task)=> task.id !== taskId))
@@ -29,11 +26,11 @@ function App() {
       <h2>My tasks</h2>
       <CategoryFilter 
         categories={CATEGORIES}
-        selectedCategory={selectedCategory}
+        selectedCategory={categories}
         onCategoryChange={handleCategoryChange}
       />
       <NewTaskForm onTaskFormSubmit={handleTaskFormSubmit} />
-      <TaskList tasks={tasks} onDeleteTask={handleDeleteTask} />
+      <TaskList tasks={TASKS} onDeleteTask={handleDeleteTask} />
     </div>
   );
 }
