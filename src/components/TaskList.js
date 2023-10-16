@@ -2,7 +2,7 @@ import React from "react";
 import Task from "./Task";
 // import { TASKS } from "../data";
 
-function TaskList({tasks}) {
+function TaskList({tasks, handleDeleteTask}) {
   // const [tasks, setTasks] = useState(TASKS)
   
   // const handleDeleteTask = (taskId) => {
@@ -18,7 +18,7 @@ function TaskList({tasks}) {
           task={task}
           text={task.text}
           category={task.category}
-         
+          handleDeleteTask = {handleDeleteTask}
         /> 
       ))}
       {/* display a list of tasks using Task component */}

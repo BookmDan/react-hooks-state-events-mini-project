@@ -12,8 +12,12 @@ function App() {
   const handleCategoryChange = (category) => {
     setCategories(category)
   }
-  const handleDeleteTask = (taskId) => {
-    setTasks((prevTasks) => prevTasks.filter((task)=> task.id !== taskId))
+  // taskId
+  const handleDeleteTask = (deletedTask) => {
+    // console.log(task)
+    const filteredTasks = tasks.filter(task => deletedTask.text !== task.text) // does the deletedTask if it does not match save it, 
+    setTasks(filteredTasks)
+    // setTasks((prevTasks) => prevTasks.filter((task)=> task.id !== taskId))
   }
 
   const handleTaskFormSubmit = (newTask) => {
@@ -29,8 +33,8 @@ function App() {
         selectedCategory={categories}
         onCategoryChange={handleCategoryChange}
       />
-      <NewTaskForm onTaskFormSubmit={handleTaskFormSubmit} />
-      <TaskList tasks={TASKS} onDeleteTask={handleDeleteTask} />
+      <NewTaskForm categories={ categories} onTaskFormSubmit={handleTaskFormSubmit} />
+      <TaskList tasks={tasks} handleDeleteTask={handleDeleteTask} />
     </div>
   );
 }

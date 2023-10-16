@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CATEGORIES } from "../data";
 
-function NewTaskForm({ onTaskFormSubmit }) {
+function NewTaskForm({ onTaskFormSubmit, categories }) {
   const [text, setText] = useState("");
   const [category, setCategory] = useState(CATEGORIES[0]); // Default to "All" category
 
@@ -39,11 +39,13 @@ function NewTaskForm({ onTaskFormSubmit }) {
       </label>
       <label>
         Category
-        <select name="category" value={category} onChange={handleCategoryChange}>
-          {CATEGORIES.map((category) => (
-            <option key={category} value={category}>
+        <select name="category">
+          {categories.map((category) => (
+            category !== "All" ? (
+            <option key={category}>
               {category}
             </option>
+          ) : null
           ))}
         </select>
       </label>
