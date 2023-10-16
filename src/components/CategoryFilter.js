@@ -19,7 +19,6 @@ function CategoryFilter({ categories, onCategoryChange }) {
           className={selectedCategory === category ? "selected" : ""}
         >{category} </button>
       ))}
-      {/* render <button> elements for each category here */}
     </div>
   );
 }

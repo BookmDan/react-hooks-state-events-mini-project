@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { CATEGORIES } from "../data";
 
 function NewTaskForm({ onTaskFormSubmit, categories }) {
-  const [text, setText] = useState("");
-  const [category, setCategory] = useState(CATEGORIES[0]); // Default to "All" category
+  const [details, setDetails] = useState("")
+  const [category, setCategory] = useState("")
 
-  const handleTextChange = (e) => {
-    setText(e.target.value);
+  const handleDetailChange = (e) => {
+    setDetails(e.target.value);
   };
 
   const handleCategoryChange = (e) => {
@@ -15,37 +14,28 @@ function NewTaskForm({ onTaskFormSubmit, categories }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    // console.log(e)
     // Create a new task object
     const newTask = {
-      text,
-      category,
+      text: details,
+      category: category,
       id: Math.random().toString(), // Generate a unique ID (replace with a proper ID generation mechanism)
     };
-
-    // Pass the new task to the parent component
     onTaskFormSubmit(newTask);
-
-    // Reset the form
-    setText("");
-    setCategory(CATEGORIES[0]);
+    // console.log(newTask)
   };
 
   return (
     <form className="new-task-form" onSubmit={handleSubmit}>
       <label>
         Details
-        <input type="text" name="text" value={text} onChange={handleTextChange} />
+        <input type="text" name="text" value={details} onChange={handleDetailChange} />
       </label>
       <label>
         Category
-        <select name="category">
-          {categories.map((category) => (
-            category !== "All" ? (
-            <option key={category}>
-              {category}
-            </option>
-          ) : null
+        <select name="category" value={category} onChange={handleCategoryChange}>
+          {categories.map(category=> (
+          <option key={category.id}>{category} </option>
           ))}
         </select>
       </label>

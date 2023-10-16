@@ -10,7 +10,7 @@ function App() {
   const [categories, setCategories] = useState(CATEGORIES)
 
   const handleCategoryChange = (category) => {
-    setCategories(category)
+    setCategories([category])
   }
   // taskId
   const handleDeleteTask = (deletedTask) => {
@@ -20,8 +20,10 @@ function App() {
     // setTasks((prevTasks) => prevTasks.filter((task)=> task.id !== taskId))
   }
 
-  const handleTaskFormSubmit = (newTask) => {
-    setTasks((prevTasks) => [...prevTasks, newTask]);
+  const onTaskFormSubmit = (newTask) => {
+    setTasks([...tasks, newTask])
+    console.log(newTask)
+    // setTasks((prevTasks) => [...prevTasks, newTask]);
   };
 
 
@@ -33,7 +35,7 @@ function App() {
         selectedCategory={categories}
         onCategoryChange={handleCategoryChange}
       />
-      <NewTaskForm categories={ categories} onTaskFormSubmit={handleTaskFormSubmit} />
+      <NewTaskForm categories={categories} onTaskFormSubmit={onTaskFormSubmit} />
       <TaskList tasks={tasks} handleDeleteTask={handleDeleteTask} />
     </div>
   );
